@@ -1,26 +1,58 @@
 <html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous" >
+        </script>
+            
+        <script>
+            $(document).ready(()=>{
+                $("#title").text("Different Text");
 
-<head>
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
+                $("#getInfo").click(()=>{
 
-    <script>
-        $(document).ready(() => {
-            $("#thing").text("Diffrent Text");
-        });
+                    $.get("http://jikan.me/api/anime/" + $("#animeId").val(), (data, status)=>{
 
-        $.get("http://jikan.me/api/anime/1", (data, status)=>{
-            $("#thing").text(JSON.stringify(data));
-            $("#thing").text(data.title);
-        });
+                        $("#title").text(data.title);
+                        $("#description").text(data.synopsis);
+                        $("#image").attr("src", data.image);
+                        $("#animeInfo").show();
 
-    </script>
-</head>
+                    });
 
-<body>
-    <div id="thing">
-        Text
-    </div>
-</body>
+                    /*
+                    $.post("url", 
+                    {
+                        // Just some javascript object
+                        // Fill it with the key/value pairs the API expects
+                        message: "Message to guildies",
+                    }, (data, status)=>{
 
+                    })
+                    //*/
+                })
+
+            });
+
+        </script>
+            
+    </head>
+        
+    <body>
+        <div>
+            Enter Show Id: <input id="animeId" />
+            <button id="getInfo">Get Info</button>
+        </div>
+        <div id="animeInfo" hidden>
+            <div id="title">
+                Some Text
+            </div>
+            <img id="image" src="" />
+            <div id="description">
+                Some Text
+            </div>
+
+        </div>
+        
+        
+    </body>
+        
 </html>
