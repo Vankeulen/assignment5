@@ -9,12 +9,12 @@
 
                 $("#getInfo").click(()=>{
 
-                    $.get("http://jikan.me/api/anime/" + $("#animeId").val(), (data, status)=>{
+                    $.get("http://jikan.me/api/anime/" + $("#showId").val(), (data, status)=>{
 
                         $("#title").text(data.title);
                         $("#description").text(data.synopsis);
                         $("#image").attr("src", data.image);
-                        $("#animeInfo").show();
+                        $("#showInfo").show();
 
                     });
 
@@ -38,10 +38,10 @@
         
     <body>
         <div>
-            Enter Show Id: <input id="animeId" />
+            Enter Show Id: <input id="showId" />
             <button id="getInfo">Get Info</button>
         </div>
-        <div id="animeInfo" hidden>
+        <div id="showInfo" hidden>
             <div id="title">
                 Some Text
             </div>
